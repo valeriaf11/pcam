@@ -12,7 +12,6 @@ body {
 
     min-height: 100vh;
 
-    background: #f1f5f3;
 }
 
 
@@ -31,8 +30,8 @@ body {
 
     padding: 40px 20px;
 
-    /* AQUÍ VA TU FONDO */
-    background-image: url("../img/fondocfe.png");
+    /* AQUÍ VA EL FONDO */
+      background-image: url("../img/fondocfe.png");
 
     background-size: cover;
     background-position: center;
