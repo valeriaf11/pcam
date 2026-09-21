@@ -28,70 +28,112 @@
 
     <div class="login-box">
 
-        <img
-            src="img/zotgm.png"
-            class="logo"
-            alt="Logo"
-        >
+
+        <div class="login-izquierda">
+
+            <img
+                src="img/usuariocfe.png"
+                class="logo"
+                alt="Usuario CFE"
+            >
+
+        </div>
 
 
-        <h1>PCAM</h1>
-
-        <h2>Inicio de sesión</h2>
+        <div class="login-derecha">
 
 
-        <?php
+            <h1>PCAM</h1>
 
-        if (isset($_SESSION['error'])) {
-
-            echo '<div class="error">'
-                . htmlspecialchars($_SESSION['error'])
-                . '</div>';
-
-            unset($_SESSION['error']);
-        }
-
-        ?>
+            <h2>Inicio de sesión</h2>
 
 
-        <form
-            method="POST"
-            action="index.php?controller=auth&action=autenticar"
-        >
+            <?php
+
+            if (isset($_SESSION['error'])) {
+
+                echo '<div class="error">'
+                    . htmlspecialchars($_SESSION['error'])
+                    . '</div>';
+
+                unset($_SESSION['error']);
+            }
+
+            ?>
 
 
-            <label for="usuario">
-                Usuario
-            </label>
 
-            <input
-                type="text"
-                id="usuario"
-                name="usuario"
-                placeholder="Ingresa tu usuario"
-                required
+            <!-- FORMULARIO -->
+
+            <form
+                method="POST"
+                action="index.php?controller=auth&action=autenticar"
             >
 
 
-            <label for="password">
-                Contraseña
-            </label>
+                <!-- USUARIO -->
 
-            <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Ingresa tu contraseña"
-                required
-            >
+                <div class="campo">
+
+                    <label for="usuario">
+                        Usuario
+                    </label>
+
+                    <input
+                        type="text"
+                        id="usuario"
+                        name="usuario"
+                        placeholder="Ingresa tu usuario"
+                        required
+                    >
+
+                </div>
 
 
-            <button type="submit">
-                Iniciar sesión
-            </button>
+
+                <!-- CONTRASEÑA -->
+
+                <div class="campo">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Ingresa tu contraseña"
+                        required
+                    >
+
+                </div>
 
 
-        </form>
+
+               <div class="botones-login">
+
+    <button
+        type="button"
+        class="btn-invitado"
+    >
+        Entrar como invitado
+    </button>
+
+    <button
+        type="submit"
+        class="btn-entrar"
+    >
+        Entrar
+    </button>
+
+</div>
+
+
+            </form>
+
+
+        </div>
 
     </div>
 

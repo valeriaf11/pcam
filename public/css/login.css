@@ -12,6 +12,7 @@ body {
 
     min-height: 100vh;
 
+    background: #f1f5f3;
 }
 
 
@@ -30,8 +31,7 @@ body {
 
     padding: 40px 20px;
 
-    /* AQUÍ VA EL FONDO */
-      background-image: url("../img/fondocfe.png");
+    background-image: url("../img/fondocfe.png");
 
     background-size: cover;
     background-position: center;
@@ -43,20 +43,93 @@ body {
 
 .login-box {
 
-    width: 380px;
+    
+    width: 700px;
+
+    min-height: 370px;
 
     padding: 40px;
 
-    /* Un poquito transparente para verse más bonito */
     background: rgba(255, 255, 255, 0.96);
 
-    border-radius: 15px;
+    border-radius: 20px;
 
     box-shadow:
         0 8px 30px
         rgba(0, 0, 0, 0.20);
+
+    /*HORIZONTAL */
+    display: flex;
+
+    align-items: center;
+
+    gap: 45px;
 }
 
+.login-izquierda {
+
+    width: 230px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+
+.login-izquierda .logo {
+
+   width: 220px;
+    max-width: 220px;
+    margin: 0;
+}
+
+
+/* ===============================
+   PARTE DERECHA
+================================ */
+
+.login-derecha {
+
+    flex: 1;
+}
+
+
+.login-derecha h1 {
+
+     text-align: center;
+
+    font-size: 32px;
+
+    margin: 0 0 5px 0;
+
+    color: #00664f;
+
+    position: relative;
+    left: 50px;
+}
+
+
+
+.login-derecha h2 {
+
+    text-align: center;
+
+    margin: 0 0 25px 0;
+
+    font-size: 18px;
+
+    font-weight: normal;
+
+    color: #444;
+
+     position: relative;
+    left: 55px;
+}
+/*-------------------------------*/
 
 /* LOGO*/
 
@@ -143,21 +216,33 @@ input:focus {
    BOTÓN
  */
 
-button {
+/* CONTENEDOR DE LOS DOS BOTONES */
 
-    width: 100%;
+.botones-login {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
 
     margin-top: 25px;
+}
 
-    padding: 13px;
+
+/* CONFIGURACIÓN GENERAL DE AMBOS */
+
+.botones-login button {
+
+    margin: 0;
+
+    padding: 13px 18px;
 
     border: none;
 
     border-radius: 7px;
-
-    background: #008e67;
-
-    color: white;
 
     font-size: 16px;
 
@@ -168,6 +253,41 @@ button {
     transition: 0.2s;
 }
 
+
+/* BOTÓN INVITADO */
+
+.btn-invitado {
+
+    width: 230px;
+
+    background: #fdbd19;
+
+    color: #222;
+}
+
+
+.btn-invitado:hover {
+
+    background: #e9aa00;
+}
+
+
+/* BOTÓN ENTRAR */
+
+.btn-entrar {
+
+    width: 120px;
+
+    background: #008e67;
+
+    color: white;
+}
+
+
+.btn-entrar:hover {
+
+    background: #007454;
+}
 button:hover {
 
     background: #007454;
@@ -207,14 +327,43 @@ button:hover {
 
     }
 
-    .login-box {
-
-        width: 100%;
-
-        max-width: 380px;
-
-        padding: 30px 25px;
-
+   
     }
 
+    .campo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
 }
+
+
+.campo label {
+
+    width: 90px;
+
+    margin: 0;
+
+    flex-shrink: 0;
+
+    font-size: 15px;
+}
+
+
+.campo input {
+
+    flex: 1;
+
+    width: auto;
+
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 7px;
+}
+
