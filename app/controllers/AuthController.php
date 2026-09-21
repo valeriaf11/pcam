@@ -1,6 +1,7 @@
 <?php
 
 require_once MODEL_PATH . '/Usuario.php';
+
 use App\Models\Usuario;
 
 class AuthController
