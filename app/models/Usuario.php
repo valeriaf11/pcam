@@ -1,7 +1,28 @@
+<?php
+
+namespace App\Models;
 class Usuario
 {
-    public function buscarPorUsuario($usuario)
+
+    public function validar($usuario, $password)
     {
-        // Consultar sqlite_pcam.db
+
+        // Usuario temporal para probar el sistema
+
+        $usuarioCorrecto = 'admin';
+        $passwordCorrecto = '1234';
+
+
+        if (
+            $usuario === $usuarioCorrecto &&
+            $password === $passwordCorrecto
+        ) {
+
+            return true;
+
+        }
+
+
+        return false;
     }
 }

@@ -1,16 +1,47 @@
-<?php require VIEW_PATH . '/layouts/header.php'; ?>
+<!DOCTYPE html>
 
-<?php require VIEW_PATH . '/layouts/navbar.php'; ?>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>PCAM</title>
+
+    <link
+        rel="stylesheet"
+        href="css/sistema.css"
+    >
+
+</head>
 
 
-<main class="contenido">
+<body>
 
-    <!--
-        Aquí irá el contenido que cambia
-        dependiendo de la sección.
-    -->
-
-</main>
+    <h1>
+        Bienvenido a PCAM
+    </h1>
 
 
-<?php require VIEW_PATH . '/layouts/footer.php'; ?>
+    <p>
+
+        Usuario:
+
+        <strong>
+
+            <?= htmlspecialchars($_SESSION['usuario']) ?>
+
+        </strong>
+
+    </p>
+
+
+    <a href="index.php?controller=auth&action=logout">
+
+        Cerrar sesión
+
+    </a>
+
+</body>
+
+</html>
