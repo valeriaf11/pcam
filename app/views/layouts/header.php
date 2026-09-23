@@ -1,27 +1,16 @@
-<header class="header-principal">
+<header id="header-pcam">
 
-    <!-- LOGOS DE LA IZQUIERDA -->
-    <div class="logos-izquierda">
-
-        <img
-            src="/pcam2/public/img/gobierno_mexico.png"
-            alt="Gobierno de México"
-            class="logo-gobierno"
-        >
-
-        <div class="separador-header"></div>
+    <div id="header-logo-izquierdo">
 
         <img
-            src="/pcam2/public/img/cfe.png"
-            alt="CFE"
-            class="logo-cfe"
+            src="img/gobierno_mexico.png"
+            alt="Gobierno de México y CFE"
         >
 
     </div>
 
 
-    <!-- TÍTULOS DEL CENTRO -->
-    <div class="titulos">
+    <div id="header-titulos">
 
         <h2>
             Gerencia Regional de Transmisión Central
@@ -32,17 +21,16 @@
         </h3>
 
         <h1>
-            Contenedor de Archivos
+            PCAM
         </h1>
 
     </div>
 
 
-    <!-- LOGO DE LA DERECHA -->
-    <div class="logo-derecha">
+    <div id="header-logo-derecho">
 
         <img
-            src="/pcam2/public/img/fondocfe.png"
+            src="img/zotgm.png"
             alt="ZOTGM"
         >
 

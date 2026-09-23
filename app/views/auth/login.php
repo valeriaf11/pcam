@@ -13,6 +13,8 @@
 
     <title>PCAM - Inicio de sesión</title>
 
+<link rel="stylesheet" href="/pcam/public/css/login.css?v=100">
+
     <link
         rel="stylesheet"
         href="css/login.css"
@@ -23,7 +25,9 @@
 
 <body>
 
-
+<?php
+require VIEW_PATH . '/layouts/header.php';
+?>
 <div class="login-container">
 
     <div class="login-box">
@@ -43,9 +47,9 @@
         <div class="login-derecha">
 
 
-            <h1>PCAM</h1>
+        
 
-            <h2>Inicio de sesión</h2>
+            <h1>Inicio de sesión</h1>
 
 
             <?php
@@ -76,7 +80,7 @@
                 <div class="campo">
 
                     <label for="usuario">
-                        Usuario
+                        Usuario:
                     </label>
 
                     <input
@@ -96,7 +100,7 @@
                 <div class="campo">
 
                     <label for="password">
-                        Contraseña
+                        Contraseña:
                     </label>
 
                     <input
@@ -127,7 +131,7 @@
         Entrar
     </button>
 
-</div>
+              </div>
 
 
             </form>

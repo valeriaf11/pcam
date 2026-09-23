@@ -1,4 +1,4 @@
-/*
+/* 
    CONFIGURACIÓN GENERAL
 */
 
@@ -6,8 +6,13 @@
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
+    padding: 0;
+}
+
+body {
     font-family: Arial, sans-serif;
 
     min-height: 100vh;
@@ -16,17 +21,157 @@ body {
 }
 
 
-/*CONTENEDOR DEL LOGIN + FONDO*/
+/* 
+   HEADER
+ */
+
+#header-pcam {
+
+    width: 100%;
+    height: 130px;
+
+    background: white;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1.6fr 1fr;
+
+    align-items: center;
+
+    padding: 10px 50px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    overflow: hidden;
+}
+
+
+/* 
+   LOGO IZQUIERDO
+ */
+
+#header-logo-izquierdo {
+
+    display: flex;
+
+    justify-content: flex-start;
+
+    align-items: center;
+}
+
+
+#header-logo-izquierdo img {
+
+    width: 340px;
+
+    max-width: 340px;
+
+    max-height: 90px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* 
+   TÍTULOS DEL HEADER
+ */
+
+#header-titulos {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+#header-titulos h2 {
+
+    margin: 0 0 5px 0;
+
+    font-size: 20px;
+
+    color: #00664f;
+
+    font-weight: bold;
+}
+
+
+#header-titulos h3 {
+
+    margin: 0 0 5px 0;
+
+    font-size: 18px;
+
+    color: #558d18;
+
+    font-weight: bold;
+}
+
+
+#header-titulos h1 {
+
+    margin: 0;
+
+    font-size: 18px;
+
+    color: #111;
+
+    font-weight: bold;
+}
+
+
+/* 
+   LOGO ZOTGM
+ */
+
+#header-logo-derecho {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+}
+
+
+#header-logo-derecho img {
+
+    width: 200px;
+
+    height: 300px;
+
+    max-width: 305px;
+
+    max-height: 90px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* 
+   FONDO DEL LOGIN
+ */
 
 .login-container {
 
     width: 100%;
 
-    /* Resta aproximadamente la altura del header */
     min-height: calc(100vh - 130px);
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     padding: 40px 20px;
@@ -34,17 +179,20 @@ body {
     background-image: url("../img/fondocfe.png");
 
     background-size: cover;
+
     background-position: center;
+
     background-repeat: no-repeat;
 }
 
 
-/*Caja de login*/
+/* 
+   CAJA DEL LOGIN
+ */
 
 .login-box {
 
-    
-    width: 700px;
+    width: 790px;
 
     min-height: 370px;
 
@@ -58,7 +206,6 @@ body {
         0 8px 30px
         rgba(0, 0, 0, 0.20);
 
-    /*HORIZONTAL */
     display: flex;
 
     align-items: center;
@@ -66,9 +213,14 @@ body {
     gap: 45px;
 }
 
+
+/* 
+   LOGIN IZQUIERDA
+ */
+
 .login-izquierda {
 
-    width: 230px;
+    width: 270px;
 
     display: flex;
 
@@ -82,15 +234,19 @@ body {
 
 .login-izquierda .logo {
 
-   width: 220px;
-    max-width: 220px;
-    margin: 0;
+    width: 230px;
+
+    max-width: 230px;
+
+    height: auto;
+
+    display: block;
 }
 
 
-/* ===============================
-   PARTE DERECHA
-================================ */
+/* 
+   LOGIN DERECHA
+ */
 
 .login-derecha {
 
@@ -100,95 +256,53 @@ body {
 
 .login-derecha h1 {
 
-     text-align: center;
-
-    font-size: 32px;
-
-    margin: 0 0 5px 0;
-
-    color: #00664f;
-
-    position: relative;
-    left: 50px;
-}
-
-
-
-.login-derecha h2 {
+    margin: 0 0 30px 0;
 
     text-align: center;
 
-    margin: 0 0 25px 0;
-
-    font-size: 18px;
-
-    font-weight: normal;
-
-    color: #444;
-
-     position: relative;
-    left: 55px;
-}
-/*-------------------------------*/
-
-/* LOGO*/
-
-.logo {
-
-    display: block;
-
-    max-width: 130px;
-
-    margin: 0 auto 20px auto;
-}
-
-
-/* 
-   TÍTULOS
- */
-
-h1,
-h2 {
-    text-align: center;
-}
-
-h1 {
-    margin-top: 0;
-    margin-bottom: 5px;
+    font-size: 30px;
 
     color: #00664f;
-}
-
-h2 {
-    font-size: 18px;
-
-    font-weight: normal;
-
-    margin-bottom: 30px;
-
-    color: #444;
 }
 
 
 /* 
    CAMPOS
-*/
+ */
 
-label {
+.campo {
 
-    display: block;
+    display: flex;
 
-    margin-top: 15px;
-    margin-bottom: 5px;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+
+.campo label {
+
+    width: 90px;
+
+    margin: 0;
+
+    flex-shrink: 0;
+
+    font-size: 15px;
 
     color: #333;
 }
 
-input {
 
-    width: 100%;
+.campo input {
 
-    padding: 12px;
+    flex: 1;
+
+    width: auto;
+
+    padding: 12px 14px;
 
     border: 1px solid #ccc;
 
@@ -197,12 +311,12 @@ input {
     font-size: 15px;
 
     outline: none;
+
+    background: white;
 }
 
 
-/* Cuando haces clic en el campo */
-
-input:focus {
+.campo input:focus {
 
     border-color: #008e67;
 
@@ -213,26 +327,11 @@ input:focus {
 
 
 /* 
-   BOTÓN
+   BOTONES
  */
 
-/* CONTENEDOR DE LOS DOS BOTONES */
-
-.botones-login {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 12px;
-
-    margin-top: 25px;
-}
 
 
-/* CONFIGURACIÓN GENERAL DE AMBOS */
 
 .botones-login button {
 
@@ -256,11 +355,11 @@ input:focus {
 
 /* BOTÓN INVITADO */
 
-.btn-invitado {
+.botones-login .btn-invitado {
 
     width: 230px;
 
-    background: #fdbd19;
+    background: #fddb19;
 
     color: #222;
 }
@@ -274,11 +373,11 @@ input:focus {
 
 /* BOTÓN ENTRAR */
 
-.btn-entrar {
+.botones-login .btn-entrar {
 
     width: 120px;
 
-    background: #008e67;
+    background: #33b065;
 
     color: white;
 }
@@ -286,18 +385,13 @@ input:focus {
 
 .btn-entrar:hover {
 
-    background: #007454;
-}
-button:hover {
-
-    background: #007454;
-
+    background: #2b954e;
 }
 
 
 /* 
    MENSAJE DE ERROR
-*/
+ */
 
 .error {
 
@@ -312,58 +406,8 @@ button:hover {
     border-radius: 5px;
 
     text-align: center;
+
+    font-size: 14px;
 }
 
-
-/* 
-   modo responsivo
-*/
-
-@media (max-width: 500px) {
-
-    .login-container {
-
-        padding: 25px 15px;
-
-    }
-
-   
-    }
-
-    .campo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-bottom: 18px;
-}
-
-
-.campo label {
-
-    width: 90px;
-
-    margin: 0;
-
-    flex-shrink: 0;
-
-    font-size: 15px;
-}
-
-
-.campo input {
-
-    flex: 1;
-
-    width: auto;
-
-    padding: 12px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 7px;
-}
 
