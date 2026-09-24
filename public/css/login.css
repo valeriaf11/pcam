@@ -330,38 +330,36 @@ body {
    BOTONES
  */
 
+/* BOTÓN INVITADO */
 
+.botones-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    gap: 12px;
 
-.botones-login button {
-
-    margin: 0;
-
-    padding: 13px 18px;
-
-    border: none;
-
-    border-radius: 7px;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.2s;
+    margin-top: 50px;
 }
 
 
 /* BOTÓN INVITADO */
 
 .botones-login .btn-invitado {
-
     width: 230px;
 
-    background: #fddb19;
+    padding: 13px;
 
+    border: none;
+    border-radius: 7px;
+
+    background: #c8fd19;
     color: #222;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
 }
 
 
@@ -372,21 +370,24 @@ body {
 
 
 /* BOTÓN ENTRAR */
-
-.botones-login .btn-entrar {
-
+.btn-entrar {
     width: 120px;
 
-    background: #33b065;
+    padding: 13px;
 
+    border: none;
+    border-radius: 7px;
+
+    background: #0c008e;
     color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
 }
 
 
-.btn-entrar:hover {
-
-    background: #2b954e;
-}
 
 
 /* 
@@ -411,3 +412,18 @@ body {
 }
 
 
+.botones-login .btn-invitado {
+    background-color: rgb(236, 227, 56) !important;
+    color: white !important;
+}
+
+.botones-login .btn-entrar:hover {
+
+    background: #dae847;
+}
+
+
+.botones-login .btn-entrar {
+    background-color: rgb(31, 129, 68) !important;
+    color: white !important;
+}

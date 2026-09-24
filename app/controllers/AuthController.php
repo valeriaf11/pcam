@@ -13,7 +13,7 @@ class AuthController
         // Si ya inició sesión, no mostrar login otra vez
         if (isset($_SESSION['usuario'])) {
 
-            header('Location: index.php?controller=auth&action=inicio');
+            header('Location: /pcam/public/inicio');
             exit;
         }
 
@@ -24,9 +24,10 @@ class AuthController
     public function autenticar()
     {
 
+        // Solo permitir peticiones POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
-            header('Location: index.php');
+            header('Location: /pcam/public/');
             exit;
         }
 
@@ -35,39 +36,41 @@ class AuthController
         $password = $_POST['password'] ?? '';
 
 
+        // Validar campos vacíos
         if (empty($usuario) || empty($password)) {
 
             $_SESSION['error'] = 'Completa todos los campos.';
 
-            header('Location: index.php');
+            header('Location: /pcam/public/');
             exit;
         }
 
-    
+
+        // Crear modelo Usuario
         $modeloUsuario = new Usuario();
 
+
+        // Validar usuario y contraseña
         $usuarioValido = $modeloUsuario->validar(
             $usuario,
             $password
         );
 
 
+        // Si los datos son correctos
         if ($usuarioValido) {
 
             $_SESSION['usuario'] = $usuario;
 
-            header(
-                'Location: index.php?controller=auth&action=inicio'
-            );
-
+            header('Location: /pcam/public/inicio');
             exit;
-
         }
 
 
+        // Si los datos son incorrectos
         $_SESSION['error'] = 'Usuario o contraseña incorrectos.';
 
-        header('Location: index.php');
+        header('Location: /pcam/public/');
         exit;
     }
 
@@ -75,12 +78,13 @@ class AuthController
     public function inicio()
     {
 
-        // Proteger la página
+        // Proteger página de inicio
         if (!isset($_SESSION['usuario'])) {
 
-            header('Location: index.php');
+            header('Location: /pcam/public/');
             exit;
         }
+
 
         require VIEW_PATH . '/inicio/index.php';
     }
@@ -92,7 +96,7 @@ class AuthController
         session_unset();
         session_destroy();
 
-        header('Location: index.php');
+        header('Location: /pcam/public/');
         exit;
     }
 }

@@ -13,7 +13,7 @@
 
     <title>PCAM - Inicio de sesión</title>
 
-<link rel="stylesheet" href="/pcam/public/css/login.css?v=100">
+
 
     <link
         rel="stylesheet"
@@ -70,9 +70,9 @@ require VIEW_PATH . '/layouts/header.php';
             <!-- FORMULARIO -->
 
             <form
-                method="POST"
-                action="index.php?controller=auth&action=autenticar"
-            >
+    method="POST"
+    action="/pcam/public/autenticar"
+>
 
 
                 <!-- USUARIO -->

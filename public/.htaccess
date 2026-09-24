@@ -1,0 +1,30 @@
+RewriteEngine On
+
+RewriteBase /pcam/public/
+
+
+# ==========================================
+# NO TOCAR ARCHIVOS Y CARPETAS REALES
+# ==========================================
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+
+# ==========================================
+# RUTAS LIMPIAS
+# ==========================================
+
+RewriteRule ^autenticar/?$ index.php?controller=auth&action=autenticar [QSA,L]
+
+RewriteRule ^inicio/?$ index.php?controller=auth&action=inicio [QSA,L]
+
+RewriteRule ^logout/?$ index.php?controller=auth&action=logout [QSA,L]
+
+
+# ==========================================
+# CUALQUIER OTRA RUTA
+# ==========================================
+
+RewriteRule ^ index.php [QSA,L]
