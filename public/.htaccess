@@ -20,7 +20,7 @@ RewriteRule ^autenticar/?$ index.php?controller=auth&action=autenticar [QSA,L]
 
 RewriteRule ^inicio/?$ index.php?controller=auth&action=inicio [QSA,L]
 
-RewriteRule ^logout/?$ index.php?controller=auth&action=logout [QSA,L]
+
 
 
 # ==========================================

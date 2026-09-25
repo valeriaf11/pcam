@@ -1,14 +1,121 @@
+/* =========================================
+   CONFIGURACIÓN GENERAL DE PCAM
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
 html {
     min-height: 100%;
 }
 
 body {
     margin: 0;
+
     min-height: 100vh;
+
+    font-family: Arial, sans-serif;
 
     background-image: url("../img/fondocfe.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   IMÁGENES
+   ========================================= */
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* =========================================
+   CONTENEDORES GENERALES
+   ========================================= */
+
+.container,
+.contenedor {
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+/* =========================================
+   FORMULARIOS
+   ========================================= */
+
+input,
+select,
+textarea,
+button {
+
+    max-width: 100%;
+}
+
+
+/* =========================================
+   TABLAS
+   ========================================= */
+
+.tabla-responsive {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media screen and (max-width: 768px) {
+
+    .container,
+    .contenedor {
+
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+}
+
+
+/* =========================================
+   CELULAR
+   ========================================= */
+
+@media screen and (max-width: 480px) {
+
+    .container,
+    .contenedor {
+
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    input,
+    select,
+    textarea {
+
+        width: 100%;
+    }
+
 }

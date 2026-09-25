@@ -74,26 +74,62 @@ body {
 }
 
 
-/* 
-   TÍTULOS DEL HEADER
- */
+/* =========================================
+   HEADER NORMAL - COMPUTADORA
+   ========================================= */
+
+#header-pcam {
+    width: 100%;
+    height: 130px;
+
+    background: white;
+
+    display: grid;
+    grid-template-columns: 1fr 1.6fr 1fr;
+
+    align-items: center;
+
+    padding: 10px 50px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    overflow: hidden;
+}
+
+
+/* LOGO IZQUIERDO */
+
+#header-logo-izquierdo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#header-logo-izquierdo img {
+    width: 340px;
+    max-width: 340px;
+    max-height: 90px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* TÍTULOS */
 
 #header-titulos {
-
     display: flex;
 
     flex-direction: column;
 
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
 }
 
-
 #header-titulos h2 {
-
     margin: 0 0 5px 0;
 
     font-size: 20px;
@@ -103,9 +139,7 @@ body {
     font-weight: bold;
 }
 
-
 #header-titulos h3 {
-
     margin: 0 0 5px 0;
 
     font-size: 18px;
@@ -115,9 +149,7 @@ body {
     font-weight: bold;
 }
 
-
 #header-titulos h1 {
-
     margin: 0;
 
     font-size: 18px;
@@ -128,12 +160,9 @@ body {
 }
 
 
-/* 
-   LOGO ZOTGM
- */
+/* LOGO DERECHO */
 
 #header-logo-derecho {
-
     display: flex;
 
     justify-content: flex-end;
@@ -141,16 +170,12 @@ body {
     align-items: center;
 }
 
-
 #header-logo-derecho img {
-
     width: 200px;
-
-    height: 300px;
-
-    max-width: 305px;
-
+    max-width: 200px;
     max-height: 90px;
+
+    height: auto;
 
     object-fit: contain;
 
@@ -324,11 +349,18 @@ body {
         0 0 0 3px
         rgba(0, 142, 103, 0.12);
 }
+/*CAMPO DE CONTRASEÑA*/
+.password-container {
+    position: relative;
+    width: 100%;
+}
 
+.password-container input {
+    width: 100%;
+    padding-right: 50px;
+}
 
-/* 
-   BOTONES
- */
+/* BOTONES */
 
 /* BOTÓN INVITADO */
 
@@ -353,7 +385,7 @@ body {
     border: none;
     border-radius: 7px;
 
-    background: #c8fd19;
+    background: #fde219;
     color: #222;
 
     font-size: 16px;
@@ -413,7 +445,7 @@ body {
 
 
 .botones-login .btn-invitado {
-    background-color: rgb(236, 227, 56) !important;
+    background-color: rgb(250, 214, 34) !important;
     color: white !important;
 }
 
@@ -424,6 +456,184 @@ body {
 
 
 .botones-login .btn-entrar {
-    background-color: rgb(31, 129, 68) !important;
+    background-color: rgb(24, 125, 63) !important;
     color: white !important;
+}
+
+/* =====================================================
+   RESPONSIVE
+   Estos estilos solo se aplican en pantallas pequeñas
+   ===================================================== */
+
+
+    /* todo lo demás que ya tienes */
+@media screen and (max-width: 768px) {
+
+    /* =====================
+       HEADER
+       ===================== */
+
+    #header-pcam {
+        width: 100%;
+        height: auto;
+        min-height: 100px;
+
+        grid-template-columns: 1fr 2fr 1fr;
+
+        padding: 10px;
+
+        gap: 5px;
+    }
+
+    #header-logo-izquierdo {
+        justify-content: center;
+    }
+
+    #header-logo-izquierdo img {
+        width: 100%;
+        max-width: 130px;
+        height: auto;
+    }
+
+    #header-logo-derecho {
+        justify-content: center;
+    }
+
+    #header-logo-derecho img {
+        width: 100%;
+        max-width: 80px;
+        height: auto;
+    }
+
+    #header-titulos h2 {
+        font-size: 13px;
+        margin: 0 0 4px 0;
+    }
+
+    #header-titulos h3 {
+        font-size: 12px;
+        margin: 0 0 4px 0;
+    }
+
+    #header-titulos h1 {
+        font-size: 14px;
+    }
+
+
+    /* =====================
+       FONDO
+       ===================== */
+
+    .login-container {
+        min-height: calc(100vh - 100px);
+
+        padding: 25px 15px;
+
+        align-items: center;
+    }
+
+
+    /* =====================
+       CAJA DEL LOGIN
+       ===================== */
+
+    .login-box {
+        width: 100%;
+        max-width: 430px;
+
+        min-height: auto;
+
+        padding: 25px 20px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    /* =====================
+       IMAGEN DEL USUARIO
+       ===================== */
+
+    .login-izquierda {
+        width: 100%;
+    }
+
+    .login-izquierda .logo {
+        width: 130px;
+        max-width: 100%;
+    }
+
+
+    /* =====================
+       FORMULARIO
+       ===================== */
+
+    .login-derecha {
+        width: 100%;
+    }
+
+    .login-derecha h1 {
+        font-size: 24px;
+
+        margin-bottom: 25px;
+    }
+
+
+    /* =====================
+       USUARIO Y CONTRASEÑA
+       ===================== */
+
+    .campo {
+        width: 100%;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 7px;
+    }
+
+    .campo label {
+        width: 100%;
+    }
+
+    .campo input {
+        width: 100%;
+
+        font-size: 16px;
+    }
+
+
+    /* CONTRASEÑA */
+
+    .password-container {
+        width: 100%;
+    }
+
+    .password-container input {
+        width: 100%;
+
+        padding-right: 50px;
+    }
+
+
+    /* =====================
+       BOTONES
+       ===================== */
+
+    .botones-login {
+        width: 100%;
+
+        flex-direction: column;
+
+        margin-top: 25px;
+
+        gap: 10px;
+    }
+
+    .botones-login .btn-invitado,
+    .botones-login .btn-entrar {
+        width: 100%;
+    }
 }

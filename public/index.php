@@ -24,6 +24,7 @@ switch ($controller) {
         if (method_exists($authController, $action)) {
 
             $authController->$action();
+            
 
         } else {
 

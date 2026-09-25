@@ -13,7 +13,7 @@ class AuthController
         // Si ya inició sesión, no mostrar login otra vez
         if (isset($_SESSION['usuario'])) {
 
-            header('Location: /pcam/public/inicio');
+            header('Location: index.php?controller=auth&action=inicio');
             exit;
         }
 
@@ -24,10 +24,9 @@ class AuthController
     public function autenticar()
     {
 
-        // Solo permitir peticiones POST
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
-            header('Location: /pcam/public/');
+            header('Location: index.php');
             exit;
         }
 
@@ -36,55 +35,74 @@ class AuthController
         $password = $_POST['password'] ?? '';
 
 
-        // Validar campos vacíos
         if (empty($usuario) || empty($password)) {
 
             $_SESSION['error'] = 'Completa todos los campos.';
 
-            header('Location: /pcam/public/');
+            header('Location: index.php');
             exit;
         }
 
+    
+        $modeloUsuario = new usuario();
 
-        // Crear modelo Usuario
-        $modeloUsuario = new Usuario();
-
-
-        // Validar usuario y contraseña
         $usuarioValido = $modeloUsuario->validar(
             $usuario,
             $password
         );
 
 
-        // Si los datos son correctos
         if ($usuarioValido) {
 
             $_SESSION['usuario'] = $usuario;
 
-            header('Location: /pcam/public/inicio');
+            header(
+                'Location: index.php?controller=auth&action=inicio'
+            );
+
             exit;
+
         }
 
 
-        // Si los datos son incorrectos
         $_SESSION['error'] = 'Usuario o contraseña incorrectos.';
 
-        header('Location: /pcam/public/');
+        header('Location: index.php');
         exit;
+    }
+
+    public function invitado()
+    {
+         $_SESSION['LOGIN_OK'] = true;
+            $_SESSION['nombre_usuario'] = "Invitado";
+            //$_SESSION['ip_usuario'] = $reg_ip['ip'];
+            $_SESSION['rol_id'] = "3";//invitado  
+            //$_SESSION['ruta_inicial'] = ROOT_PATH.'/'.$config->contenedor_ruta_base . $reg_ip['nivel_inicial'];
+            $_SESSION['nivel_inicial'] = "";
+            //header("Location: contenido.php");
+            require VIEW_PATH . '/contenido.php';
+            exit;
+
+        // Si ya inició sesión, no mostrar registro otra vez
+        if (isset($_SESSION['usuario'])) {
+
+            header('Location: index.php?controller=auth&action=inicio');
+            exit;
+        }
+
+        require VIEW_PATH . '/auth/registro.php';
     }
 
 
     public function inicio()
     {
 
-        // Proteger página de inicio
+        // Proteger la página
         if (!isset($_SESSION['usuario'])) {
 
-            header('Location: /pcam/public/');
+            header('Location: index.php');
             exit;
         }
-
 
         require VIEW_PATH . '/inicio/index.php';
     }
@@ -96,7 +114,7 @@ class AuthController
         session_unset();
         session_destroy();
 
-        header('Location: /pcam/public/');
+        header('Location: index.php');
         exit;
     }
 }

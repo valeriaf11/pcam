@@ -2,21 +2,30 @@
 
 <html lang="es">
 
-<head>
+<?php
+require VIEW_PATH . '/layouts/head.php';
+?>
 
-    <meta charset="UTF-8">
+<body>
 
-    <title>PCAM</title>
+<?php
+require VIEW_PATH . '/layouts/header.php';
+?>
 
-    <link rel="stylesheet" href="/pcam/public/css/estilos.css">
 
-<h1>Bienvenido a PCAM</h1>
+<div class="contenedor">
 
-<p>
-    Usuario:
-    <strong><?= $_SESSION['usuario'] ?></strong>
-</p>
+    
 
-<a href="index.php?controller=auth&action=logout">
-    Cerrar sesión
-</a>
+   
+
+    <a href="index.php?controller=auth&action=logout">
+        Cerrar sesión
+    </a>
+
+</div>
+
+
+</body>
+
+</html>

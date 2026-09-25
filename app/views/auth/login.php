@@ -13,8 +13,10 @@
 
     <title>PCAM - Inicio de sesión</title>
 
-
-
+  <link
+    rel="stylesheet"
+    href="/pcam/public/css/login.css?v=100"
+>
     <link
         rel="stylesheet"
         href="css/login.css"
@@ -28,10 +30,14 @@
 <?php
 require VIEW_PATH . '/layouts/header.php';
 ?>
+
+
 <div class="login-container">
 
     <div class="login-box">
 
+
+        <!-- IMAGEN -->
 
         <div class="login-izquierda">
 
@@ -44,10 +50,10 @@ require VIEW_PATH . '/layouts/header.php';
         </div>
 
 
+        <!-- LOGIN -->
+
         <div class="login-derecha">
 
-
-        
 
             <h1>Inicio de sesión</h1>
 
@@ -66,13 +72,12 @@ require VIEW_PATH . '/layouts/header.php';
             ?>
 
 
-
             <!-- FORMULARIO -->
 
             <form
-    method="POST"
-    action="/pcam/public/autenticar"
->
+                method="POST"
+                action="/pcam/public/autenticar"
+            >
 
 
                 <!-- USUARIO -->
@@ -94,7 +99,6 @@ require VIEW_PATH . '/layouts/header.php';
                 </div>
 
 
-
                 <!-- CONTRASEÑA -->
 
                 <div class="campo">
@@ -114,24 +118,27 @@ require VIEW_PATH . '/layouts/header.php';
                 </div>
 
 
+                <!-- BOTONES -->
 
-               <div class="botones-login">
+                <div class="botones-login">
 
-    <button
-        type="button"
-        class="btn-invitado"
-    >
-        Entrar como invitado
-    </button>
+                    <button
+                        type="button"
+                        class="btn-invitado"
+                        onclick="window.location.href='/pcam/public/invitado'"
+                    >
+                        Entrar como invitado
+                    </button>
 
-    <button
-        type="submit"
-        class="btn-entrar"
-    >
-        Entrar
-    </button>
 
-              </div>
+                    <button
+                        type="submit"
+                        class="btn-entrar"
+                    >
+                        Entrar
+                    </button>
+
+                </div>
 
 
             </form>
