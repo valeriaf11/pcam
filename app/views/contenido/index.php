@@ -102,7 +102,7 @@ if (($config->canvas_tipo_fondo ?? '0') === '1') {
                 <button type="button" class="btn-herr" id="btn_folder_add_bar" title="Nueva carpeta"><img src="<?= asset($iconos['nueva']) ?>" alt=""><span>Nueva</span></button>
             <?php endif; ?>
             <?php if ($permisos['descargar']): ?>
-                <button type="button" class="btn-herr" id="btn_download_file" title="Descargar seleccionados en ZIP"><img src="<?= asset($iconos['descargar']) ?>" alt=""><span>Descargar</span></button>
+                <button type="button" class="btn-herr" id="btn_download_file" title="Descargar archivo seleccionado"><img src="<?= asset($iconos['descargar']) ?>" alt=""><span>Descargar</span></button>
             <?php endif; ?>
             <?php if ($permisos['usuarios']): ?>
                 <button type="button" class="btn-herr" id="btn_config_list_users" title="Usuarios"><img src="<?= asset($iconos['usuarios']) ?>" alt=""><span>Usuarios</span></button>
@@ -273,38 +273,49 @@ if (($config->canvas_tipo_fondo ?? '0') === '1') {
 <div class="aviso-flotante" id="aviso_flotante" role="alert"></div>
 
 <!-- Datos para JavaScript: rutas del sistema, permisos y token CSRF -->
+
 <script>
     window.PCAM_CONFIG = <?= json_encode([
         'csrf' => $csrf,
         'rol' => $rol,
         'permisos' => $permisos,
+
         'urls' => [
             'carpetas' => url('contenido', 'carpetas'),
             'listar' => url('contenido', 'listar'),
             'ver' => url('contenido', 'ver'),
+
             'crearCarpeta' => url('archivos', 'crearCarpeta'),
             'renombrar' => url('archivos', 'renombrar'),
             'borrar' => url('archivos', 'borrar'),
-            'generarZip' => url('descargas', 'generarZip'),
-            'descargarZip' => url('descargas', 'descargarZip'),
+
+            'descargar' => url('descargas', 'descargar'),
+
             'subir' => url('subidas', 'subir'),
+
             'usuariosListar' => url('usuarios', 'listar'),
             'usuariosGuardar' => url('usuarios', 'guardar'),
             'usuariosBorrar' => url('usuarios', 'borrar'),
             'usuariosCarpetas' => url('usuarios', 'carpetas'),
+
             'configObtener' => url('configuracion', 'obtener'),
             'configGuardar' => url('configuracion', 'guardar'),
+
             'login' => url('auth', 'login'),
+
             'iconosTipos' => asset('img/tipos/'),
             'dtIdioma' => asset('plugins/DataTables/datatable_es-ES.json'),
         ],
+
     ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) ?>;
 </script>
+
 <script src="<?= asset('plugins/jquery/jquery-3.7.1.min.js') ?>"></script>
 <script src="<?= asset('plugins/bootstrap/bootstrap.bundle.min.js') ?>"></script>
 <script src="<?= asset('plugins/jsTree/jstree.min.js') ?>"></script>
 <script src="<?= asset('plugins/DataTables/datatables.min.js') ?>"></script>
 <script src="<?= asset('js/extensiones.js?v=2') ?>"></script>
-<script src="<?= asset('js/contenido.js?v=2') ?>"></script>
+<script src="<?= asset('js/contenido.js?v=3') ?>"></script>
+
 </body>
 </html>

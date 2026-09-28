@@ -299,24 +299,66 @@
         $('#info_seleccion').text(n + ' seleccionado' + (n === 1 ? '' : 's') + ' · ' + estado.items.length + ' elemento' + (estado.items.length === 1 ? '' : 's'));
     }
 
-    /* ---------------------------------------------------------------------
-     * DESCARGA EN ZIP
-     * ------------------------------------------------------------------- */
-    function descargar() {
-        var archivos = Object.keys(estado.seleccion);
-        if (!archivos.length) {
-            aviso('Selecciona uno o más archivos o carpetas para descargar.', true);
-            return;
-        }
-        cargando(true, 'Generando archivo ZIP...');
-        api(URL.generarZip, { ruta: estado.ruta, archivos: archivos }).then(function (r) {
-            // Descarga directa (el navegador guarda el archivo)
-            window.location.href = URL.descargarZip + '&token=' + encodeURIComponent(r.token);
-            aviso('Descargando ' + r.nombre + ' (' + r.total + ' archivo(s)).');
-        }).catch(function (err) { aviso(err.message, true); })
-            .finally(function () { cargando(false); });
+   /* ---------------------------------------------------------------------
+ * DESCARGA DIRECTA
+ *
+ * Descarga un solo archivo conservando su formato original.
+ *
+ * Ejemplo:
+ * PDF   -> reporte.pdf
+ * Excel -> datos.xlsx
+ * Word  -> documento.docx
+ * ------------------------------------------------------------------- */
+
+function descargar() {
+
+    // Obtener los nombres seleccionados.
+    var seleccionados = Object.keys(estado.seleccion);
+
+    if (!seleccionados.length) {
+        aviso('Selecciona un archivo para descargar.', true);
+        return;
     }
 
+    // Como ya no usamos ZIP, solo un archivo por vez.
+    if (seleccionados.length > 1) {
+        aviso('Selecciona solamente un archivo para descargar.', true);
+        return;
+    }
+
+    var nombre = seleccionados[0];
+
+    // Buscar el objeto del archivo seleccionado.
+    var item = estado.items.find(function (it) {
+        return it.nombre === nombre;
+    });
+
+    if (!item) {
+        aviso('No se encontró el archivo seleccionado.', true);
+        return;
+    }
+
+    // No descargar carpetas directamente.
+    if (item.tipo === 'carpeta' || item.tipo === 'folder') {
+        aviso('Selecciona un archivo, no una carpeta.', true);
+        return;
+    }
+
+    // Detectar si la URL ya contiene ?
+    var separador = URL.descargar.indexOf('?') !== -1 ? '&' : '?';
+
+    var url =
+        URL.descargar +
+        separador +
+        'ruta=' + encodeURIComponent(estado.ruta) +
+        '&archivo=' + encodeURIComponent(nombre);
+
+    // Descargar directamente.
+    // NO usamos api(), porque el servidor devuelve un archivo, no JSON.
+    window.location.href = url;
+
+    aviso('Descargando ' + nombre + '.');
+}
     /* ---------------------------------------------------------------------
      * SUBIR ARCHIVOS (solo Admin / Usuario)
      * ------------------------------------------------------------------- */

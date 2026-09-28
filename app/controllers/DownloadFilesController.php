@@ -1,137 +1,118 @@
 <?php
+
 /**
  * ============================================================================
- * DownloadFilesController.php  -  Descarga de archivos seleccionados en ZIP
+ * DownloadFilesController.php
+ * Descarga directa de archivos en su formato original
  * ============================================================================
- * Paso 1  POST descargas/generarZip   {"ruta": "/Manuales", "archivos": ["a.pdf","Carpeta"]}
- *         -> crea el ZIP en /tmp del proyecto y regresa {"ok":true,"token":"..."}
- * Paso 2  GET  descargas/descargarZip&token=...
- *         -> envía el ZIP al navegador y lo borra del servidor.
  *
- * Nombre del ZIP: <archivo_zip><nombre> + fecha opcional (config.xml).
- * Permiso: 'descargar' (Admin, Usuario y, si está permitido, Invitado).
+ * Ejemplos:
+ * reporte.pdf  -> descarga reporte.pdf
+ * datos.xlsx   -> descarga datos.xlsx
+ * archivo.docx -> descarga archivo.docx
  *
- * CORRECCIONES:
- *  - El JS llamaba "generarZipFile"/"downloadZipFile" y el controlador tenía
- *    "generateZipFiles"/"downloadZipFiles" (nunca coincidían).
- *  - downloadZipFiles recibía el NOMBRE del zip desde el navegador: se podía
- *    descargar cualquier archivo del servidor (Path Traversal). Ahora se usa
- *    un token aleatorio guardado en la sesión.
- *  - Las carpetas seleccionadas ahora se agregan completas (recursivo).
+ * No se genera ZIP.
  */
 
 class DownloadFilesController
 {
-    /** Carpeta temporal para los ZIP */
-    private function carpetaTmp(): string
+    /**
+     * Descarga un archivo directamente.
+     */
+    public function descargar(): void
     {
-        $dir = ROOT_PATH . '/tmp';
-        if (!is_dir($dir)) {
-            mkdir($dir, 0775, true);
-        }
-        // Limpieza: borra ZIPs de más de 1 hora que se quedaron sin descargar
-        foreach (glob($dir . '/pcam_*.zip') ?: [] as $viejo) {
-            if (filemtime($viejo) < time() - 3600) {
-                @unlink($viejo);
-            }
-        }
-        return $dir;
-    }
-
-    public function generarZip(): void
-    {
-        Sesion::requerir('descargar');
-        Sesion::validarCsrf();
-        if (!class_exists('ZipArchive')) {
-            Respuesta::error('Falta la extensión zip de PHP (actívala en php.ini: extension=zip).', 500);
-        }
-
-        $d = Respuesta::entradaJson();
-        $ruta = (string) ($d['ruta'] ?? '');
-        $archivos = is_array($d['archivos'] ?? null) ? $d['archivos'] : [];
-        if (!$archivos) {
-            Respuesta::error('No hay archivos seleccionados.');
-        }
-
-        $token = bin2hex(random_bytes(16));
-        $zipRuta = $this->carpetaTmp() . '/pcam_' . $token . '.zip';
-        $zip = new ZipArchive();
-        if ($zip->open($zipRuta, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
-            Respuesta::error('No se pudo crear el ZIP.', 500);
-        }
-
-        $agregados = 0;
-        foreach ($archivos as $nombre) {
-            $abs = Rutas::absoluta($ruta, (string) $nombre);
-            if ($abs === null || !file_exists($abs)) {
-                continue;
-            }
-            if (is_dir($abs)) {
-                $agregados += $this->agregarCarpeta($zip, $abs, basename($abs));
-            } else {
-                $zip->addFile($abs, basename($abs));
-                $agregados++;
-            }
-        }
-        $zip->close();
-
-        if ($agregados === 0) {
-            @unlink($zipRuta);
-            Respuesta::error('Los elementos seleccionados no existen o están vacíos.');
-        }
-
-        // Nombre final que verá el usuario
-        $config = Config::load();
-        $nombreZip = $config->archivo_zip_nombre
-            . ($config->archivo_zip_agregar_fecha === '1' ? '_' . date('Y-m-d_H-i') : '')
-            . '.' . $config->archivo_zip_ext;
-
-        $_SESSION['zips'][$token] = ['ruta' => $zipRuta, 'nombre' => $nombreZip];
-        Respuesta::ok(['token' => $token, 'nombre' => $nombreZip, 'total' => $agregados]);
-    }
-
-    /** Agrega una carpeta completa al ZIP. Regresa cuántos archivos agregó */
-    private function agregarCarpeta(ZipArchive $zip, string $dir, string $prefijo): int
-    {
-        $n = 0;
-        $zip->addEmptyDir($prefijo);
-        foreach (scandir($dir) ?: [] as $item) {
-            if ($item === '.' || $item === '..' || $item[0] === '.') {
-                continue;
-            }
-            $ruta = $dir . '/' . $item;
-            if (is_dir($ruta) && !is_link($ruta)) {
-                $n += $this->agregarCarpeta($zip, $ruta, $prefijo . '/' . $item);
-            } elseif (is_file($ruta)) {
-                $zip->addFile($ruta, $prefijo . '/' . $item);
-                $n++;
-            }
-        }
-        return max($n, 1);
-    }
-
-    public function descargarZip(): void
-    {
+        // El usuario debe tener permiso de descarga.
         Sesion::requerir('descargar', false);
-        $token = (string) ($_GET['token'] ?? '');
-        $info = $_SESSION['zips'][$token] ?? null;
 
-        if (!$info || !is_file($info['ruta'])) {
-            http_response_code(404);
-            exit('El archivo ZIP ya no está disponible. Vuelve a generarlo.');
+        // Datos enviados desde JavaScript mediante GET.
+        $ruta = (string) ($_GET['ruta'] ?? '');
+        $nombre = (string) ($_GET['archivo'] ?? '');
+
+        // No permitir nombre vacío.
+        if ($nombre === '') {
+            http_response_code(400);
+            exit('No se especificó ningún archivo.');
         }
-        unset($_SESSION['zips'][$token]);
-        session_write_close(); // libera la sesión mientras se descarga
 
+        /*
+         * Rutas::absoluta() obtiene la ruta real del archivo
+         * dentro de la carpeta permitida para el usuario.
+         *
+         * Ejemplo:
+         *
+         * ruta = /Reportes
+         * nombre = reporte.pdf
+         *
+         * podría obtener:
+         *
+         * C:/xampp/htdocs/pcam/storage/Reportes/reporte.pdf
+         */
+        $archivo = Rutas::absoluta($ruta, $nombre);
+
+        // Si la ruta no es válida o el archivo no existe.
+        if ($archivo === null || !is_file($archivo)) {
+            http_response_code(404);
+            exit('El archivo no existe o no está disponible.');
+        }
+
+        /*
+         * Detectar el tipo del archivo.
+         *
+         * PDF  -> application/pdf
+         * PNG  -> image/png
+         * TXT  -> text/plain
+         * etc.
+         */
+        $tipoMime = 'application/octet-stream';
+
+        if (function_exists('finfo_open')) {
+
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+
+            if ($finfo !== false) {
+
+                $detectado = finfo_file($finfo, $archivo);
+
+                if ($detectado !== false) {
+                    $tipoMime = $detectado;
+                }
+
+                finfo_close($finfo);
+            }
+        }
+
+        // Nombre que verá el usuario al descargar.
+        $nombreDescarga = basename($archivo);
+
+        /*
+         * Limpiar cualquier salida previa.
+         *
+         * Esto evita que warnings, espacios u otro HTML
+         * dañen el archivo descargado.
+         */
         while (ob_get_level() > 0) {
             ob_end_clean();
         }
-        header('Content-Type: application/zip');
-        header('Content-Length: ' . filesize($info['ruta']));
-        header('Content-Disposition: attachment; filename="' . $info['nombre'] . '"');
+
+        // Indicar el tipo de archivo.
+        header('Content-Type: ' . $tipoMime);
+
+        // Indicar tamaño.
+        header('Content-Length: ' . filesize($archivo));
+
+        // attachment obliga al navegador a descargarlo.
+        header(
+            'Content-Disposition: attachment; filename="' .
+            str_replace('"', '', $nombreDescarga) .
+            '"'
+        );
+
+        // Evitar guardar copias antiguas en caché.
         header('Cache-Control: no-store');
-        readfile($info['ruta']);
-        @unlink($info['ruta']);
+
+        // Enviar el archivo al navegador.
+        readfile($archivo);
+
         exit;
     }
 }
