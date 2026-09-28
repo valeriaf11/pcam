@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    ============================================================================
+    CONFIGURACIÓN GENERAL DE PCAM (Contenedor de Archivos)
+    ============================================================================
+    - Este archivo lo lee config/Config.php (Config::load()).
+    - La sección <app> NO se edita desde la página, solo aquí a mano.
+    - El resto se puede editar desde el botón "Configuración General"
+      (solo lo ve el Administrador, rol_id = 1).
+    - Las rutas relativas se toman a partir de la carpeta raíz del proyecto
+      (la carpeta "pcam"), no de la carpeta "public".
+-->
+<configuracion_contenedor_archivos>
+    <app><!-- Esta área no es editable desde la app, solo a nivel de archivo -->
+        <header>
+            <color_fondo>#ffffff</color_fondo><!-- Color de fondo del encabezado -->
+        </header>
+        <imagenes>
+            <logo_izquierdo>img/gobierno_mexico.png</logo_izquierdo><!-- Logo izquierdo del encabezado (dentro de /public) -->
+            <logo_derecho>img/zotgm.png</logo_derecho><!-- Logo derecho del encabezado (dentro de /public) -->
+            <imagen_login>img/usuariocfe.png</imagen_login><!-- Imagen de la tarjeta de login -->
+            <imagen_fondo>img/fondocfe.png</imagen_fondo><!-- Imagen de fondo del login y del contenido -->
+        </imagenes>
+        <seguridad>
+            <!-- 0 = la IP se toma SOLO de REMOTE_ADDR (recomendado).
+                 1 = el servidor está detrás de un proxy de confianza y se usa X-Forwarded-For.
+                 OJO: con 1 cualquiera podría falsificar su IP si no hay proxy. -->
+            <confiar_proxy>0</confiar_proxy>
+            <max_intentos_login>5</max_intentos_login><!-- Intentos fallidos antes de bloquear -->
+            <minutos_bloqueo>5</minutos_bloqueo><!-- Minutos de bloqueo tras exceder intentos -->
+        </seguridad>
+    </app>
+    <pagina>
+        <titulos>
+            <titulo_pagina>Contenedor de Archivos</titulo_pagina>
+            <titulo1>Gerencia Regional de Transmisión Central</titulo1>
+            <titulo2>Zona de Operación de Transmisión Guerrero Morelos</titulo2>
+            <titulo3>PCAM</titulo3>
+        </titulos>
+        <texto_color>
+            <titulo_pagina_color>#00664f</titulo_pagina_color>
+            <titulo1_color>#00664f</titulo1_color>
+            <titulo2_color>#558d18</titulo2_color>
+            <titulo3_color>#111111</titulo3_color>
+        </texto_color>
+        <sombras_texto>0</sombras_texto><!-- 0: sin sombra, 1: con sombra -->
+    </pagina>
+    <canvas>
+        <tipo_fondo>1</tipo_fondo><!-- 0: ninguno, 1: imagen, 2: color -->
+        <tipo_fondo_opacity>0.3</tipo_fondo_opacity><!-- 0.1 a 1.0 -->
+        <tipo_fondo_background_color>#f1f5f3</tipo_fondo_background_color>
+    </canvas>
+    <contenedor>
+        <privado>0</privado><!-- 0: público (se permite "Entrar como invitado"), 1: privado (solo usuarios registrados) -->
+        <ruta_base>archivos</ruta_base><!-- Carpeta raíz donde viven TODOS los archivos que se muestran (relativa a /pcam o absoluta, ej. D:/Contenedor) -->
+        <nivel_invitado>/Publico</nivel_invitado><!-- Subcarpeta (dentro de ruta_base) que puede ver el invitado. Vacío = todo -->
+        <invitado_descargar>1</invitado_descargar><!-- 1: el invitado puede descargar en ZIP, 0: solo ver -->
+    </contenedor>
+    <bd_sqlite>
+        <ruta_bd>basededatos/sqlite_pcam.db</ruta_bd><!-- Relativa a /pcam -->
+    </bd_sqlite>
+    <archivo_zip>
+        <nombre>ContenedorArchivos</nombre>
+        <ext>zip</ext>
+        <agregar_fecha>1</agregar_fecha><!-- 0: NO, 1: SI -->
+    </archivo_zip>
+    <servidor_smtp>
+        <ip>10.26.1.9</ip>
+        <port>25</port>
+        <remitente>noreply@cfe.mx</remitente>
+    </servidor_smtp>
+</configuracion_contenedor_archivos>

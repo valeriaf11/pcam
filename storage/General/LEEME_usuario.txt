@@ -1,0 +1,2 @@
+Ejemplo de área para usuarios autorizados.
+Asigna el campo nivel_inicial del usuario a General para limitarlo a esta carpeta.

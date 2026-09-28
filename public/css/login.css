@@ -1,0 +1,262 @@
+/* =============================================================================
+   login.css  -  Estilos de la página de INICIO DE SESIÓN y de "Recuperar datos"
+   =============================================================================
+   Se conserva el diseño original: fondo fondocfe.png, tarjeta blanca con la
+   imagen del usuario a la izquierda y el formulario a la derecha, botón
+   amarillo "Entrar como invitado" y botón verde "Entrar".
+   Se quitaron los bloques repetidos (el header ahora está en estilos.css).
+   ============================================================================= */
+
+/* Fondo del login */
+.login-container {
+    width: 100%;
+    min-height: calc(100vh - 130px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-image: url("../img/fondocfe.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Caja (tarjeta) del login */
+.login-box {
+    width: 790px;
+    max-width: 100%;
+    min-height: 370px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.20);
+    display: flex;
+    align-items: center;
+    gap: 45px;
+}
+
+/* Columna izquierda: imagen del usuario CFE */
+.login-izquierda {
+    width: 270px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.login-izquierda .logo {
+    width: 230px;
+    max-width: 230px;
+    height: auto;
+    display: block;
+}
+
+/* Columna derecha: formulario */
+.login-derecha {
+    flex: 1;
+}
+
+.login-derecha h1 {
+    margin: 0 0 30px 0;
+    text-align: center;
+    font-size: 30px;
+    color: #00664f;
+}
+
+/* Campos (etiqueta + caja de texto en la misma línea) */
+.campo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.campo label {
+    width: 90px;
+    margin: 0;
+    flex-shrink: 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.campo input {
+    flex: 1;
+    width: auto;
+    padding: 12px 14px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+    background: white;
+}
+
+.campo input:focus {
+    border-color: #008e67;
+    box-shadow: 0 0 0 3px rgba(0, 142, 103, 0.12);
+}
+
+/* Campo de contraseña con botón "ver" */
+.password-container {
+    position: relative;
+    flex: 1;
+    display: flex;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 50px;
+}
+
+.password-container .ver-password {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #00664f;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Botones */
+.botones-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 50px;
+}
+
+.botones-login button,
+.botones-login a.boton {
+    padding: 13px;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Botón amarillo: entrar como invitado */
+.botones-login .btn-invitado {
+    width: 230px;
+    background-color: rgb(250, 214, 34);
+}
+
+.botones-login .btn-invitado:hover {
+    background-color: #e9aa00;
+}
+
+/* Botón verde: entrar */
+.botones-login .btn-entrar {
+    width: 120px;
+    background-color: rgb(24, 125, 63);
+}
+
+.botones-login .btn-entrar:hover {
+    background-color: #0f5e2d;
+}
+
+/* Enlace "¿Olvidaste tus datos?" */
+.enlace-recobrar {
+    display: block;
+    margin-top: 18px;
+    text-align: center;
+    font-size: 14px;
+    color: #00664f;
+}
+
+/* Mensajes */
+.error,
+.aviso {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.error {
+    background: #ffe5e5;
+    color: #a10000;
+}
+
+.aviso {
+    background: #e3f4ea;
+    color: #00664f;
+}
+
+/* Pie con la IP detectada (ayuda para dar de alta equipos) */
+.ip-detectada {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 12px;
+    color: #777;
+}
+
+/* =====================================================
+   RESPONSIVE (celular)
+   ===================================================== */
+@media screen and (max-width: 768px) {
+    .login-container {
+        min-height: calc(100vh - 100px);
+        padding: 25px 15px;
+    }
+
+    .login-box {
+        max-width: 430px;
+        min-height: auto;
+        padding: 25px 20px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .login-izquierda {
+        width: 100%;
+    }
+
+    .login-izquierda .logo {
+        width: 130px;
+        max-width: 100%;
+    }
+
+    .login-derecha {
+        width: 100%;
+    }
+
+    .login-derecha h1 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+
+    .campo {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 7px;
+    }
+
+    .campo label {
+        width: 100%;
+    }
+
+    .campo input {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .botones-login {
+        flex-direction: column;
+        margin-top: 25px;
+        gap: 10px;
+    }
+
+    .botones-login .btn-invitado,
+    .botones-login .btn-entrar {
+        width: 100%;
+    }
+}

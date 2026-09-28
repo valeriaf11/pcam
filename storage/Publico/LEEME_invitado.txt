@@ -1,0 +1,2 @@
+Este archivo es un ejemplo del área pública de PCAM.
+Los invitados pueden visualizar la lista y descargar archivos, pero no modificarlos.

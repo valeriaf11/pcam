@@ -1,0 +1,398 @@
+/* =============================================================================
+   contenido.css  -  Estilos del EXPLORADOR DE ARCHIVOS
+   =============================================================================
+   (Este archivo no existía y la vista lo pedía.) Mantiene la línea visual del
+   login: fondo fondocfe.png, tarjetas blancas translúcidas con bordes
+   redondeados y verdes institucionales.
+   ============================================================================= */
+
+:root {
+    --verde: #00664f;
+    --verde-claro: #558d18;
+    --verde-boton: rgb(24, 125, 63);
+    --amarillo: rgb(250, 214, 34);
+    --borde: #dfe7e3;
+}
+
+body.pagina-contenido {
+    background-image: url("../img/fondocfe.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Contenedor general bajo el header */
+.explorador {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 20px;
+    min-height: 0;
+}
+
+/* ---------------- BARRA DE HERRAMIENTAS ---------------- */
+.barra-herramientas {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.barra-herramientas .grupo {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.btn-herr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 62px;
+    padding: 5px 6px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    background: transparent;
+    color: var(--verde);
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-herr img {
+    width: 28px;
+    height: 28px;
+}
+
+.btn-herr:hover {
+    background: #eef6f2;
+    border-color: var(--borde);
+    color: var(--verde);
+}
+
+.btn-herr.activo {
+    background: #e1f0e8;
+    border-color: #b9d8c8;
+}
+
+.barra-ruta {
+    flex: 1;
+    min-width: 180px;
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: #fafcfb;
+    color: #333;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+/* ---------------- ÁREA DE TRABAJO ---------------- */
+.area-trabajo {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    min-height: 0;
+}
+
+.panel-arbol,
+.panel-contenido {
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    overflow: auto;
+}
+
+.panel-arbol {
+    width: 270px;
+    flex-shrink: 0;
+    padding: 10px 6px;
+}
+
+.panel-arbol.oculto {
+    display: none;
+}
+
+.panel-contenido {
+    flex: 1;
+    position: relative;
+    padding: 12px;
+}
+
+/* Capa de fondo configurable (imagen o color con opacidad) */
+.fondo-canvas {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
+    border-radius: 14px;
+}
+
+.contenedor-items {
+    position: relative;
+    z-index: 1;
+    min-height: 100%;
+}
+
+/* Árbol */
+#jstree .jstree-anchor {
+    font-size: 14px;
+}
+
+#jstree .jstree-clicked {
+    background: #e1f0e8;
+    box-shadow: inset 0 0 0 1px #b9d8c8;
+}
+
+/* ---------------- VISTA ICONOS ---------------- */
+.grid-iconos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px;
+}
+
+.item-icono {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 6px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+}
+
+.item-icono:hover {
+    background: rgba(225, 240, 232, 0.8);
+    border-color: #cfe3da;
+}
+
+.item-icono.seleccionado {
+    background: #d4ebdf;
+    border-color: var(--verde-claro);
+}
+
+.item-icono img {
+    width: 56px;
+    height: 56px;
+}
+
+.item-icono .nombre {
+    font-size: 12.5px;
+    color: #222;
+    word-break: break-word;
+    line-height: 1.25;
+    max-height: 3.75em;
+    overflow: hidden;
+}
+
+.item-icono .check {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+}
+
+/* ---------------- VISTA DETALLES ---------------- */
+.tabla-detalles img {
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+}
+
+.tabla-detalles td {
+    vertical-align: middle;
+}
+
+.tabla-detalles tr.seleccionado td {
+    background: #d4ebdf !important;
+}
+
+.tabla-detalles .enlace-item {
+    color: #1a1a1a;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.tabla-detalles .enlace-item:hover {
+    color: var(--verde);
+    text-decoration: underline;
+}
+
+/* Carpeta vacía */
+.vacio {
+    padding: 40px;
+    text-align: center;
+    color: #6b7c75;
+}
+
+/* Zona para soltar archivos (arrastrar y soltar) */
+.zona-soltar {
+    display: none;
+    position: absolute;
+    inset: 8px;
+    z-index: 5;
+    align-items: center;
+    justify-content: center;
+    border: 3px dashed var(--verde-claro);
+    border-radius: 12px;
+    background: rgba(225, 240, 232, 0.92);
+    color: var(--verde);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.zona-soltar.visible {
+    display: flex;
+}
+
+/* ---------------- MENÚ CONTEXTUAL ---------------- */
+.menu-contextual {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    min-width: 190px;
+    margin: 0;
+    padding: 6px 0;
+    list-style: none;
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+
+.menu-contextual li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.menu-contextual li img {
+    width: 18px;
+    height: 18px;
+}
+
+.menu-contextual li:hover {
+    background: #eef6f2;
+}
+
+.menu-contextual li.deshabilitado {
+    color: #aaa;
+    pointer-events: none;
+}
+
+/* ---------------- PIE ---------------- */
+.pie-explorador {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 10px;
+    font-size: 13px;
+    color: #333;
+}
+
+/* ---------------- MODALES ---------------- */
+.modal-pcam {
+    background: var(--verde);
+    color: white;
+}
+
+.btn-pcam {
+    background: var(--verde-boton);
+    border-color: var(--verde-boton);
+    color: white;
+    font-weight: bold;
+}
+
+.btn-pcam:hover {
+    background: #0f5e2d;
+    border-color: #0f5e2d;
+    color: white;
+}
+
+.modal h6.seccion {
+    margin: 14px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e1f0e8;
+    color: var(--verde);
+    font-weight: bold;
+}
+
+/* ---------------- AVISO FLOTANTE ---------------- */
+.aviso-flotante {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 4000;
+    max-width: 420px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--verde);
+    color: white;
+    font-size: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+}
+
+.aviso-flotante.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.aviso-flotante.error {
+    background: #a10000;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media screen and (max-width: 768px) {
+    body.pagina-contenido {
+        height: auto;
+    }
+
+    .explorador {
+        padding: 8px;
+    }
+
+    .area-trabajo {
+        flex-direction: column;
+    }
+
+    .panel-arbol {
+        width: 100%;
+        max-height: 220px;
+    }
+
+    .panel-contenido {
+        min-height: 400px;
+    }
+
+    .btn-herr span {
+        display: none;
+    }
+
+    .btn-herr {
+        min-width: 40px;
+    }
+}

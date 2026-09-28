@@ -1,0 +1,24 @@
+# =============================================================================
+# public/.htaccess  -  Rutas limpias para Apache (XAMPP / WAMP)
+# =============================================================================
+# Requiere mod_rewrite activo. Ejemplos:
+#   http://servidor/pcam/public/            -> login (o entra directo por IP)
+#   http://servidor/pcam/public/login       -> index.php?url=login
+#   http://servidor/pcam/public/contenido   -> index.php?url=contenido
+# Si tu proyecto NO está en /pcam/public, cambia RewriteBase.
+
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /pcam/public/
+
+    # Si el archivo o carpeta existe (css, js, img...), se sirve tal cual
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Todo lo demás pasa por el front controller
+    RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+</IfModule>

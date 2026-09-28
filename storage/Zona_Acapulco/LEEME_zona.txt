@@ -1,0 +1,2 @@
+Ejemplo de una zona restringida.
+Un usuario con nivel_inicial = Zona_Acapulco solo podrá navegar dentro de esta carpeta.

@@ -1,0 +1,6 @@
+# Si alguien entra a http://servidor/pcam/ lo manda a /pcam/public/
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^$ public/ [L]
+</IfModule>
+Options -Indexes
