@@ -1,20 +1,31 @@
 <?php
 /**
  * ============================================================================
- * contenido/index.php  -  EXPLORADOR DE ARCHIVOS (pantalla principal)
+ * contenido/index.php - EXPLORADOR DE ARCHIVOS
  * ============================================================================
- * Estructura de la pantalla:
- *   [ header institucional ]
- *   [ barra de herramientas: Inicio | Carpetas | Iconos | Detalles | Subir nivel |
- *     ruta actual | Subir archivos* | Nueva carpeta* | Descargar | Usuarios** |
- *     Configuración** | Salir ]
- *   [ árbol de carpetas (jsTree) ] [ contenido de la carpeta (iconos o tabla) ]
- *   [ pie: usuario, rol, forma de acceso ]
- *      *  solo Administrador y Usuario        ** solo Administrador
+ */
+
+/**
+ * Variables recibidas desde ContenidoController::index()
  *
- * Variables (desde ContenidoController::index): $config, $nombre, $rol,
- * $metodo, $permisos, $csrf
- *
+ * @var Config $config
+ * @var string $nombre
+ * @var int $rol
+ * @var string $metodo
+ * @var array{
+ *     ver: bool,
+ *     descargar: bool,
+ *     subir: bool,
+ *     administrar: bool,
+ *     usuarios: bool,
+ *     configuracion: bool
+ * } $permisos
+ * @var string $csrf
+ * @var string $carpetas_json
+ * @var string $nivel_invitado
+ * @var string $archivo_zip_nombre
+ * @var bool $archivo_zip_agregar_fecha 
+ * 
  * Los permisos se aplican DOS veces: aquí (no se dibujan los botones) y en
  * cada controlador (aunque alguien llame la URL a mano, se rechaza).
  *
@@ -254,7 +265,7 @@ if (($config->canvas_tipo_fondo ?? '0') === '1') {
                 <div class="mb-2"><label class="form-label">Usuario</label><input class="form-control" name="username" maxlength="40" required pattern="[A-Za-z0-9._\-]{3,40}"></div>
                 <div class="mb-2"><label class="form-label">Contraseña <small class="text-muted" id="ayuda_password">(vacío = no cambiar)</small></label><input class="form-control" name="password" type="password" maxlength="100" autocomplete="new-password"></div>
                 <div class="mb-2"><label class="form-label">Correo</label><input class="form-control" name="email" type="email" maxlength="120"></div>
-                <div class="mb-2"><label class="form-label">IP del equipo (acceso automático)</label><input class="form-control" name="ip" maxlength="45" placeholder="Ej. 10.26.5.120 (vacío = siempre pide login)"></div>
+                <div class="mb-2"><label class="form-label">IP del equipo (acceso automático)</label><input class="form-control" name="ip" maxlength="45" placeholder="Ej. 10.26.5.120"></div>
                 <div class="row g-2">
                     <div class="col-5"><label class="form-label">Rol</label><select class="form-select" name="rol_id"><option value="1">Administrador</option><option value="2">Usuario</option><option value="3">Invitado</option></select></div>
                     <div class="col-7"><label class="form-label">Nivel inicial (carpeta)</label><select class="form-select sel-carpetas" name="nivel_inicial"></select></div>

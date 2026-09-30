@@ -64,8 +64,72 @@ class Respuesta
  */
 function url(string $controlador, string $accion = 'index', array $params = []): string
 {
-    $q = array_merge(['controller' => $controlador, 'action' => $accion], $params);
-    return BASE_URL . '/index.php?' . http_build_query($q, '', '&', PHP_QUERY_RFC3986);
+    /*
+     * Alias de las páginas que queremos mostrar con URL limpia.
+     *
+     * Ejemplo:
+     * auth + login  -> /login
+     * contenido + index -> /contenido
+     */
+    $alias = [
+        'auth@login' => 'login',
+        'auth@autenticar' => 'autenticar',
+        'auth@invitado' => 'invitado',
+        'auth@logout' => 'logout',
+
+        'contenido@index' => 'contenido',
+
+        'recobrar@formulario' => 'recobrar',
+    ];
+
+    // Crear una clave para buscar el alias.
+    $clave = $controlador . '@' . $accion;
+
+    /*
+     * Si la ruta tiene un alias limpio,
+     * usamos /login, /contenido, /recobrar, etc.
+     */
+    if (isset($alias[$clave])) {
+
+        $url = BASE_URL . '/' . $alias[$clave];
+
+        // Si además vienen parámetros, se agregan normalmente.
+        if (!empty($params)) {
+            $url .= '?' . http_build_query(
+                $params,
+                '',
+                '&',
+                PHP_QUERY_RFC3986
+            );
+        }
+
+        return $url;
+    }
+
+    /*
+     * Las acciones internas que todavía no tienen alias
+     * siguen funcionando como antes.
+     *
+     * Ejemplo:
+     * contenido/listar
+     * usuarios/guardar
+     * descargas/descargar
+     */
+    $q = array_merge(
+        [
+            'controller' => $controlador,
+            'action' => $accion
+        ],
+        $params
+    );
+
+    return BASE_URL . '/index.php?' .
+        http_build_query(
+            $q,
+            '',
+            '&',
+            PHP_QUERY_RFC3986
+        );
 }
 
 /** URL de un recurso estático dentro de /public (css, js, img) */

@@ -17,7 +17,7 @@ $conBootstrap = $conBootstrap ?? false;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($config->titulo3) ?> - <?= e($tituloPagina) ?></title>
-    <link rel="icon" href="<?= asset('img/tipos/folder.svg') ?>">
+    <link rel="icon" href="<?= asset('img/inicio/cfe_logo.png') ?>">
 
     <?php if ($conBootstrap): ?>
         <link rel="stylesheet" href="<?= asset('plugins/bootstrap/bootstrap.min.css') ?>">
